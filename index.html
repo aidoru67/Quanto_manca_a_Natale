@@ -1,61 +1,132 @@
+
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Countdown a Natale</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      font-family: Arial, Helvetica, sans-serif;
-      color: white;
-      text-shadow: 2px 2px 6px black;
-    }
-    #countdown {
-      font-size: 8rem;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Countdown a Natale</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 15px;
+
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-color: #000;
+
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            text-shadow: 2px 2px 6px black;
+        }
+
+        #countdown {
+            font-size: clamp(3rem, 13vw, 8rem);
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* TABLET E SMARTPHONE */
+        @media screen and (max-width: 900px) {
+
+            body {
+                background-size: contain;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-color: #000;
+            }
+
+            #countdown {
+                font-size: clamp(2.5rem, 12vw, 6rem);
+            }
+
+        }
+
+        /* SMARTPHONE */
+        @media screen and (max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+            #countdown {
+                font-size: clamp(2.5rem, 15vw, 5rem);
+            }
+
+        }
+
+    </style>
+
 </head>
+
 <body>
-  <div id="countdown"></div>
 
-  <script>
-    // --- Sfondi disponibili ---
-    const images = [
-      "bg1.jpg", "bg2.jpg", "bg3.jpg", "bg4.jpg", "bg5.jpg",
-      "bg6.jpg", "bg7.jpg", "bg8.jpg", "bg9.jpg", "bg10.jpg"
-    ];
+    <div id="countdown"></div>
 
-    // Scegli un'immagine casuale
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    document.body.style.backgroundImage = `url(${randomImage})`;
+    <script>
 
-    // --- Countdown ---
-    function updateCountdown() {
-      const now = new Date();
-      let year = now.getFullYear();
-      const christmas = new Date(year, 11, 25); // 25 dicembre (mese 11 perché parte da 0)
+        // --- Sfondi disponibili ---
 
-      if (now > christmas) {
-        christmas.setFullYear(year + 1);
-      }
+        const images = [
+            "bg1.jpg", "bg2.jpg", "bg3.jpg", "bg4.jpg", "bg5.jpg",
+            "bg6.jpg", "bg7.jpg", "bg8.jpg", "bg9.jpg", "bg10.jpg"
+        ];
 
-      const diff = christmas - now;
-      const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+        // Scegli un'immagine casuale
 
-      document.getElementById("countdown").textContent = "- " + days;
-    }
+        const randomImage = images[
+            Math.floor(Math.random() * images.length)
+        ];
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000 * 60 * 60);
-  </script>
+        document.body.style.backgroundImage = `url(${randomImage})`;
+
+
+        // --- Countdown ---
+
+        function updateCountdown() {
+
+            const now = new Date();
+            let year = now.getFullYear();
+
+            const christmas = new Date(year, 11, 25);
+
+            if (now > christmas) {
+                christmas.setFullYear(year + 1);
+            }
+
+            const diff = christmas - now;
+
+            const days = Math.ceil(
+                diff / (1000 * 60 * 60 * 24)
+            );
+
+            document.getElementById("countdown").textContent = "- " + days;
+
+        }
+
+        updateCountdown();
+
+        setInterval(updateCountdown, 1000 * 60 * 60);
+
+    </script>
+
 </body>
+
 </html>
